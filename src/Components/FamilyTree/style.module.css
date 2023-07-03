@@ -1,0 +1,51 @@
+.container{
+    margin: 0 auto;
+    width: fit-content;
+}
+
+img{
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.nameChildWrapper{
+    /* border: 2px solid red; */
+    width: fit-content;
+    height: fit-content;
+    margin:5px 20px;
+}
+
+.childWrapper{
+    display: flex;
+}
+
+.nameSpouseWrapper{
+    width: fit-content;
+    display: flex;
+    margin: auto;
+    /* border: 2px solid grey; */
+    margin-top: 20px;
+}
+.name{
+    padding: 10px;
+    width: 150px;
+    height: 200px;
+    box-shadow: 0px 2px 5px 0 rgb(236, 236, 236);
+    font-size: 12px;
+    cursor: pointer;
+    /* background-color:#0f0f0f ; */
+}
+
+.nameText{
+    margin: 15px 0px;
+}
+
+.spouse{
+    padding: 10px;
+    width: 150px;
+    height: 200px;
+    font-size: 12px;
+    box-shadow: 0px 2px 5px 0 rgb(236, 236, 236);
+    cursor: pointer;
+    /* background-color:#0f0f0f ; */
+}

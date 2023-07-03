@@ -1,0 +1,19 @@
+import React from "react";
+import styles from "./style.module.css";
+
+const Modal = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className={styles.modal}>
+      <div className="modal-content">
+        <button className="close-button" onClick={onClose}>
+          Close
+        </button>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export default Modal;

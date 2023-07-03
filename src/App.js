@@ -3,26 +3,42 @@ import "./App.css";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import FamilyTree from "./Components/FamilyTree";
+import icon from "file:///Users/pranitkumarchandel/Downloads/Game-of-Thrones-01/Game-of-Thrones-01.svg";
+import martell from "./assets/martell.jpg";
+import tully from "./assets/tully.jpg";
+import lanni from "./assets/lanni.jpg";
+import bara from "./assets/bara.jpg";
+import targ from "./assets/targ.jpg";
+import tyrell from "./assets/tyrell.jpg";
+import stark from "./assets/stark.jpg";
+import greyjoy from "./assets/greyjoy.jpg";
 
 function App() {
   const [temp, setTemp] = useState(null);
   const [houseList, setHouseList] = useState([]);
   const [currentHouse, setCurrentHouse] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const rootMap = {
     Stark: {
       name: "Rickard Stark",
+      backgroundColor: "#808080",
+      backgroundImage: stark,
       sigil:
         "https://www.freelogoservices.com/blog/wp-content/uploads/House_Stark.svg_.png",
     },
     Lannister: {
       name: "Tywin Lannister",
+      backgroundColor: "#c00909",
+      backgroundImage: lanni,
       sigil:
         "https://www.freelogoservices.com/blog/wp-content/uploads/House_Lannister.svg_.png",
     },
     Tyrell: {
       name: "Olenna Tyrell",
+      backgroundColor: "#1b8f1c",
+      backgroundImage: tyrell,
       sigil:
         "https://www.freelogoservices.com/blog/wp-content/uploads/House_Tyrell.svg_.png",
     },
@@ -34,29 +50,39 @@ function App() {
     Frey: "Walder Frey",
     Martell: {
       name: "Doran Martell",
+      backgroundColor: "#f38d1a",
+      backgroundImage: martell,
       sigil:
         "https://www.freelogoservices.com/blog/wp-content/uploads/House_Martell.svg_.png",
     },
     Mormont: "Jeor Mormont",
     Tully: {
       name: "Hoster Tully",
+      backgroundColor: "#1111b5",
+      backgroundImage: tully,
       sigil:
         "https://awoiaf.westeros.org/thumb.php?f=House_Tully.svg&width=545&lang=en",
     },
     Umber: "Ned Umber",
     Greyjoy: {
       name: "Balon Greyjoy",
+      backgroundColor: "#f0c311",
+      backgroundImage: greyjoy,
       sigil:
         "https://www.freelogoservices.com/blog/wp-content/uploads/House_Greyjoy.svg_.png",
     },
     Targaryen: {
       name: "Aerys II Targaryen",
+      backgroundColor: "#811414",
+      backgroundImage: targ,
       sigil:
         "https://www.freelogoservices.com/blog/wp-content/uploads/House_Targaryen.svg_.png",
     },
     Tarly: "Randyll Tarly",
     Baratheon: {
       name: "Robert Baratheon",
+      backgroundColor: "#edcf0c",
+      backgroundImage: bara,
       sigil:
         "https://www.freelogoservices.com/blog/wp-content/uploads/House_Baratheon.svg_.png",
     },
@@ -110,7 +136,6 @@ function App() {
       rootMap[currentHouse].name,
       response.data
     ).then((res) => {
-      console.log(res);
       setTemp({ data: res });
     });
   };
@@ -129,7 +154,7 @@ function App() {
 
     const data = {
       name: rootObj.characterName,
-      thumbImage: rootObj.characterImageThumb,
+      thumbImage: rootObj.characterImageFull,
     };
 
     if (rootObj.marriedEngaged) {
@@ -138,7 +163,7 @@ function App() {
           const res = await getCharUsingName(spo);
           return {
             name: res[0].characterName,
-            thumbImage: res[0].characterImageThumb,
+            thumbImage: res[0].characterImageFull,
           };
         })
       );
@@ -171,13 +196,13 @@ function App() {
             ...data.children,
             {
               name: res[0].characterName,
-              thumbImage: res[0].characterImageThumb,
+              thumbImage: res[0].characterImageFull,
             },
           ];
         }
       }
     }
-    data.sigil = rootMap[currentHouse].sigil;
+    data.sigil = rootMap[currentHouse].backgroundImage;
     setLoading(false);
     return data;
   };
@@ -202,35 +227,61 @@ function App() {
     }
   };
 
-  const Menulist = houseList.map((house, key) => {
-    return (
-      <option value={house} key={key}>
-        {house}
-      </option>
-    );
-  });
-
-  const handleHouseChange = (event) => {
-    setCurrentHouse(event.target.value);
-  };
+  const houses = houseList.map((house, index) => (
+    <li
+      onClick={(e) => {
+        e.stopPropagation();
+        setCurrentHouse(house);
+        setShowDropdown(!showDropdown);
+      }}
+    >
+      {house}
+    </li>
+  ));
 
   return (
-    <div className="App">
-      <div className="selectWrapper">
-        <label htmlFor="house">Second Person</label>
-        <select
-          className="personSelect"
-          name="house"
-          id="personNames"
-          onChange={handleHouseChange}
-        >
-          <option disabled selected value="">
-            Select an option
-          </option>
-          {Menulist}
-        </select>
+    <div
+      className="App"
+      style={
+        {
+          // backgroundColor: rootMap[currentHouse]?.backgroundColor || "#fff",
+          // backgroundImage: `url(${rootMap[currentHouse]?.backgroundImage})`,
+          // backgroundPosition: "center" /* Center the image */,
+          // backgroundRepeat: "no-repeat" /* Do not repeat the image */,
+          // backgroundSize: "cover",
+          // backgroundBlendMode: "luminosity",
+        }
+      }
+    >
+      <div className="logo">
+        GAME <span>OF</span> THRONES
       </div>
-      <FamilyTree treeData={temp?.data} />
+      <div className="selectWrapper">
+        <div className="searchSelectContainer">
+          <span>Select House</span>
+          <div
+            className="searchDropdown"
+            onClick={() => {
+              setShowDropdown(!showDropdown);
+            }}
+          >
+            {currentHouse ? (
+              <span>{currentHouse}</span>
+            ) : (
+              <span className="disabledCategory">Category</span>
+            )}
+            {/* <img
+              src={icons.arrowDown}
+              alt=""
+              className={`arrowImage ${showDropdown && "arrowImageUp"}`}
+            /> */}
+          </div>
+          {showDropdown && <ul className="searchOptions">{houses}</ul>}
+        </div>
+      </div>
+      <div style={{ marginTop: "100px" }}>
+        <FamilyTree treeData={temp?.data} />
+      </div>
     </div>
   );
 }

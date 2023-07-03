@@ -1,6 +1,40 @@
+@font-face {
+  font-family: myFirstFont;
+  src: url(/Users/pranitkumarchandel/Downloads/got.ttf);
+}
+
+*{
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+
+ul{
+  padding: 0;
+}
+
+li  {
+  list-style-type:none;
+}
+
+
 .App {
+  font-family: myFirstFont;
   text-align: center;
-  border: 2px solid green;
+  width: 100vw;
+  overflow: auto;
+  height: 100vh;
+  padding-top: 20px;
+  color: #fff;
+  background-image: linear-gradient(#4a484a,#0e0e0e);
+  letter-spacing: 0.1px
+  ;
 }
 
 .App-logo {
@@ -8,10 +42,90 @@
   pointer-events: none;
 }
 
+
+.searchSelectContainer {
+  border-radius: 5px;
+  width: 200px;
+  height: 100%;
+  position: relative;
+  left: 20px;
+}
+
+.searchDropdown{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border: 1px solid #cdcdcd59;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.disabledCategory{
+  color:rgb(129 129 129);
+  }
+
+  .searchOptions{
+    position: absolute;
+    background-color: #fff;
+    z-index: 100;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%);
+    min-width: 100%;
+    width: auto;
+    margin-top: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    height:fit-content;
+    animation: dropdownAnime 0.5s ease-out forwards;
+    box-shadow: 0px 2px 5px 0 rgb(236, 236, 236);
+    border-radius: 0 0 8px 8px;
+    /* padding: 0 10px; */
+  }
+
+  /* @keyframes dropdownAnime {
+    from{height: 0;}
+    to{height:350px}
+  } */
+
+  .searchOptions li{
+    display: flex;
+    align-items: center;
+    height: 30px;
+    text-align: start;
+    margin: 5px 0px;
+    padding: 0 5px;
+    color: #000;
+  }
+  
+  .searchOptions li:hover{
+    background-color: #4a484a;
+    color: #fff;
+  }
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo span{
+  margin: 0px 20px;
+  font-size: 35px;
+}
+
+.selectWrapper{
+  position: fixed;
 }
 
 .App-header {

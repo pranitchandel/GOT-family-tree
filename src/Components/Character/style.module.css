@@ -1,0 +1,44 @@
+ .container{
+    /* border: 2px solid green; */
+    position: absolute;
+    top:50%; 
+    left:50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 70vh;
+    background-image: linear-gradient(#4a484a,#0e0e0e);
+    box-shadow: 0px 2px 5px 0 rgb(236, 236, 236);
+}
+
+.characterInfo{
+    /* background-color: #fff; */
+    display: flex;
+    border: 2px solid #fff;
+    height: 100%;
+    color: #fff;
+    gap: 10px;
+}
+
+.charData{
+    /* border: 2px solid blue; */
+    text-align: start;
+    font-size: 16px;
+    overflow-y: auto;
+    flex: 3;
+}
+
+.charData strong{
+ margin-right: 10px;
+}
+
+.imageWrapper{
+    /* border: 2px solid yellow; */
+    flex: 2.5;
+}
+
+.imageWrapper img{
+    border: none;
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+}
